@@ -1,5 +1,15 @@
-build:
-  docker:
-      worker: Dockerfile
-run:
-   worker: npm start
+services:
+  - type: worker
+    name: dave-x
+    env: docker
+    region: frankfurt
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node index.js"
+    envVars:
+      - key: SESSION_ID
+        value: ""
+        required: true
+      - key: PORT
+        value: "3000"
+        required: false
